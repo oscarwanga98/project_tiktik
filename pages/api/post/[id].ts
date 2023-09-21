@@ -13,7 +13,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
     res.status(200).json(data[0]);
   } else if (req.method === 'PUT') {
-    const { comment, userId } = req.body;
+    const { comment, userId } = req.body; 
 
     const { id }: any = req.query;
 
