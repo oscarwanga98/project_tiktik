@@ -13,19 +13,17 @@ import { createOrGetUser } from '../utils';
 import Logo from '../utils/tiktik-logo.png';
 
 const Navbar = () => {
-  const [user, setUser] = useState<IUser | null>();
   const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
   const { userProfile, addUser, removeUser } = useAuthStore();
   
-  useEffect(() => {
-    setUser(userProfile);
-  }, [userProfile]);
+  // Ensure that userProfile is of type IUser or null
+  const user: IUser | null = userProfile;
 
-  const handleSearch = (e: { preventDefault: () => void }) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if(searchValue) {
+    if (searchValue) {
       router.push(`/search/${searchValue}`);
     } 
   };
@@ -56,7 +54,7 @@ const Navbar = () => {
             placeholder='Search accounts and videos'
           /> 
           <button
-            onClick={handleSearch}
+            type='submit' // Use type="submit" for the search button
             className='absolute md:right-5 right-6 top-4 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400'
           >
             <BiSearch />
@@ -64,7 +62,7 @@ const Navbar = () => {
         </form>
       </div>
       <div>
-        {userProfile ? (
+        {user ? (
           <div className='flex gap-5 md:gap-10'>
             <Link href='/upload'>
               <button className='border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2'>
@@ -72,17 +70,15 @@ const Navbar = () => {
                 <span className='hidden md:block'>Upload </span>
               </button>
             </Link>
-            {userProfile.image && (
-              <Link href={`/profile/${userProfile._id}`}>
-                <>
-                  <Image
-                    className='rounded-full cursor-pointer'
-                    src={userProfile.image}
-                    alt='user'
-                    width={40}
-                    height={40}
-                  />
-                </>
+            {user.image && (
+              <Link href={`/profile/${user._id}`}>
+                <Image
+                  className='rounded-full cursor-pointer'
+                  src={user.image}
+                  alt='user'
+                  width={40}
+                  height={40}
+                />
               </Link>
             )}
               <button
