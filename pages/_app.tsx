@@ -10,7 +10,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
-    setIsSSR(false);
+    setIsSSR(false); 
   }, []);  
 
   if (isSSR) return null;

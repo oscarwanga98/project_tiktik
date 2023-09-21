@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
-import { GoogleLogin, googleLogout  } from '@react-oauth/google';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
 import useAuthStore from '../store/authStore';
 import { IUser } from '../types';
@@ -27,7 +27,7 @@ const Navbar = () => {
     
     if(searchValue) {
       router.push(`/search/${searchValue}`);
-    }
+    } 
   };
 
   return (
@@ -39,6 +39,7 @@ const Navbar = () => {
             src={Logo}
             alt='logo'
             layout='responsive'
+            priority={true}
           />
         </div>
       </Link>
@@ -53,7 +54,7 @@ const Navbar = () => {
             onChange={(e) => setSearchValue(e.target.value)}
             className='bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full  md:top-0'
             placeholder='Search accounts and videos'
-          />
+          /> 
           <button
             onClick={handleSearch}
             className='absolute md:right-5 right-6 top-4 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400'
@@ -63,7 +64,7 @@ const Navbar = () => {
         </form>
       </div>
       <div>
-        {user ? (
+        {userProfile ? (
           <div className='flex gap-5 md:gap-10'>
             <Link href='/upload'>
               <button className='border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2'>
@@ -71,17 +72,17 @@ const Navbar = () => {
                 <span className='hidden md:block'>Upload </span>
               </button>
             </Link>
-            {user.image && (
-              <Link href={`/profile/${user._id}`}>
-                <div>
+            {userProfile.image && (
+              <Link href={`/profile/${userProfile._id}`}>
+                <>
                   <Image
                     className='rounded-full cursor-pointer'
-                    src={user.image}
+                    src={userProfile.image}
                     alt='user'
                     width={40}
                     height={40}
                   />
-                </div>
+                </>
               </Link>
             )}
               <button

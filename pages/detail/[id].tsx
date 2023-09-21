@@ -167,7 +167,7 @@ export const getServerSideProps = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await axios.get(`${BASE_URL}/api/post/${id}`);
+  const res = await axios.get(`${BASE_URL}/api/post/${id}`);  
 
   return {
     props: { postDetails: res.data },

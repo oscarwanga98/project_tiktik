@@ -72,6 +72,7 @@ const Upload = () => {
       };
 
       await axios.post(`${BASE_URL}/api/post`, doc);
+      
         
       router.push('/');
     }
